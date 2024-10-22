@@ -62,7 +62,7 @@
 
 
 <!-- Alertas de creacion -->
- 
+
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -91,7 +91,8 @@
                         toast.onmouseleave = Swal.resumeTimer;
                     }
                 });
-                $('#floatingName').focus();
+
+                $('#name').focus();
 
                 Toast.fire({
                     icon: "error",

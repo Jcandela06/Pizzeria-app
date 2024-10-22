@@ -28,9 +28,12 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
                                 <td>
-
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline-block">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" id="delete">
+                                            Delete
+                                        </button>
                                     </form>
-
                                 </td>
                             </tr>
                             @endforeach
@@ -41,3 +44,39 @@
         </div>
     </div>
 </x-app-layout>
+
+
+<!-- Alerta para eliminar usuario -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function() {
+        $('form').on('submit', function(e) {
+            e.preventDefault(); // Prevenir el envío del formulario
+
+            const form = this; // Guardar referencia al formulario
+
+            Swal.fire({
+                title: '¿Estás seguro de eliminar este usuario?',
+                text: "No podrás revertir esta acción",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Eliminado',
+                        'El usuario ha sido eliminado.',
+                        'success'
+                    );
+
+                    form.submit(); // Enviar el formulario si se confirma
+                }
+            });
+        });
+    });
+</script>
