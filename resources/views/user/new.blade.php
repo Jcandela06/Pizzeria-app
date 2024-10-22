@@ -20,26 +20,26 @@
 
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre de usuario</label>
-                            <input type="text" required class="form-control" id="name" name="name" placeholder="Nombre de usuario" >
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Nombre de usuario">
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" required class="form-control" id="email" name="email" placeholder="Email" >
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Email">
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña</label>
-                            <input type="text" required class="form-control" id="password" name="password" placeholder="Contraseña" >
+                            <input type="text" class="form-control" id="password" name="password" placeholder="Contraseña">
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Confirmar Contraseña</label>
-                            <input type="text" required class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirmar Contraseña" >
+                            <input type="text" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirmar Contraseña">
                         </div>
 
                         <div class="mb-3">
-                            <label for="role" class="form-label">Rol</label> 
+                            <label for="role" class="form-label">Rol</label>
                             <select class="form-control" id="role" name="role" placeholder="Rol" required>
                                 <option value="empleado">Empleado</option>
                                 <option value="cliente">Cliente</option>
@@ -60,6 +60,101 @@
     </div>
 </x-app-layout>
 
+
+<!-- Alertas de creacion -->
+ 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-    
+    $(document).ready(function() {
+        $('form').on('submit', function(e) {
+            e.preventDefault();
+
+            // Variables de los campos
+            var email = $('#email').val();
+            var password = $('#password').val();
+            var confirmPassword = $('#confirmpassword').val();
+            var name = $('#name').val();
+            var role = $('#role').val();
+
+            // Validaciones
+            if (!name || !email || !password || !confirmPassword || !role) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                $('#floatingName').focus();
+
+                Toast.fire({
+                    icon: "error",
+                    title: "Completa todos los campos."
+                });
+
+                return;
+            }
+                
+            if (!(email.includes('@gmail.com') || email.includes('@hotmail.com') || email.includes('@mail.com'))) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                $('#floatingName').focus();
+
+                Toast.fire({
+                    icon: "error",
+                    title: "El correo debe ser un email valido."
+                });
+
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                $('#floatingName').focus();
+
+                Toast.fire({
+                    icon: "error",
+                    title: "Las contraseñas no coinciden."
+                });
+
+                return;
+            }
+
+            // Si pasa las validaciones, mostrar mensaje de éxito
+            Swal.fire({
+                icon: 'success',
+                title: 'Usuario creado con éxito',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                // Si todo es correcto, proceder con el envío del formulario
+                $('form').unbind('submit').submit();
+            });
+        });
+    });
 </script>
