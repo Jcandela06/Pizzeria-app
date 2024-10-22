@@ -42,7 +42,7 @@
                                 {{ __('Clients') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('employees.index')">
                                 {{ __('Employees') }}
                             </x-dropdown-link>
 
