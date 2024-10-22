@@ -38,7 +38,7 @@
                                 {{ __('Users') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('clients.index')">
                                 {{ __('Clients') }}
                             </x-dropdown-link>
 

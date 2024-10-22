@@ -30,12 +30,12 @@
 
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña"  value="{{ $user->password }}">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" value="{{ $user->password }}">
                         </div>
 
                         <div class="mb-3">
                             <label for="confirmpassword" class="form-label">Confirmar Contraseña</label>
-                            <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirmar Contraseña"  value="{{ $user->password }}">
+                            <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirmar Contraseña" value="{{ $user->password }}">
                         </div>
 
                         <div class="mb-3">

@@ -31,11 +31,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();   
+        $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
-        $user->role = $request->role; 
+        $user->role = $request->role;
         $user->save();
 
         $users = DB::table('users')->get();
@@ -71,13 +71,12 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
-        $user->role = $request->role; 
+        $user->role = $request->role;
         $user->save();
 
         $users = DB::table('users')->get();
-        
-        return redirect()->route('users.index')->with('success', 'Usuario editado exitosamente.');
 
+        return redirect()->route('users.index')->with('success', 'Usuario editado exitosamente.');
     }
 
     /**

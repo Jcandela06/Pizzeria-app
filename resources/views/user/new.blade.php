@@ -9,14 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form method="POST" action="{{ route('users.store') }}">
+                    <form id="userForm" method="POST" action="{{ route('users.store') }}">
                         @csrf
-
-                        <div class="mb-3">
-                            <label for="id" class="form-label">Id</label>
-                            <input type="text" class="form-control" id="id" name="id" disabled="disabled">
-                            <div id="idHelp" class="form-text">Usuario id</div>
-                        </div>
 
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre de usuario</label>
@@ -68,7 +62,7 @@
 
 <script>
     $(document).ready(function() {
-        $('form').on('submit', function(e) {
+        $('#userForm').on('submit', function(e) {
             e.preventDefault();
 
             // Variables de los campos
@@ -101,7 +95,7 @@
 
                 return;
             }
-                
+
             if (!(email.includes('@gmail.com') || email.includes('@hotmail.com') || email.includes('@mail.com'))) {
                 const Toast = Swal.mixin({
                     toast: true,
@@ -154,7 +148,7 @@
                 timer: 1500
             }).then(function() {
                 // Si todo es correcto, proceder con el envío del formulario
-                $('form').unbind('submit').submit();
+                $('#userForm').unbind('submit').submit();
             });
         });
     });
