@@ -56,7 +56,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        $users = DB::table('users')->get();
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -64,7 +66,18 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->role = $request->role; 
+        $user->save();
+
+        $users = DB::table('users')->get();
+        
+        return redirect()->route('users.index')->with('success', 'Usuario editado exitosamente.');
+
     }
 
     /**
