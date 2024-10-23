@@ -12,6 +12,6 @@ class Pizza_Size extends Model
 
     public function pizza()
     {
-        return $this->belongsTo(Pizza::class, 'name');
+        return $this->belongsTo(Pizza::class);
     }
 }

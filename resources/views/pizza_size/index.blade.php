@@ -9,7 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                
+                    <a href="{{ route('pizza_sizes.create') }}"
+                        class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded ml-2">Add</a>
                     <table class="table">
                         <thead>
                             <tr>
@@ -23,11 +24,11 @@
                             @foreach ($pizza_size as $pizza_size)
                             <tr>
                                 <th scope="row">{{ $pizza_size->id }}</th>
-                                <td>{{ $pizza_size->pizza->name }}</td>
+                                <td>{{ $pizza_size->pizza->name}}</td>
                                 <td>{{ $pizza_size->size }}</td>
                                 <td>{{ $pizza_size->price }}</td>
                                 <td>
-                                
+
                                 </td>
                             </tr>
                             @endforeach
@@ -64,7 +65,7 @@
                 if (result.isConfirmed) {
                     Swal.fire(
                         'Eliminado',
-                        'El Pedido ha sido eliminado.',
+                        'El Tamaño ha sido eliminado.',
                         'success'
                     );
 

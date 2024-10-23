@@ -75,7 +75,8 @@ Route::middleware('auth')->group(function () {
 
     //Rutas Tamaño Pizza
     Route::get('/pizza_sizes', [Pizza_SizeController::class, 'index'])->name('pizza_sizes.index');
-    
+    Route::post('/pizza_sizes', [Pizza_SizeController::class, 'store'])->name('pizza_sizes.store');
+    Route::get('/pizza_sizes/create', [Pizza_SizeController::class, 'create'])->name('pizza_sizes.create');
 });
 
 require __DIR__ . '/auth.php';
