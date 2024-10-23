@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\SupplierController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,6 +44,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
     Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
     Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+
+    //Rutas Suppliers
+    Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
+    Route::post('/suppliers', [SupplierController::class, 'store'])->name('suppliers.store');
+    Route::get('/suppliers/create', [SupplierController::class, 'create'])->name('suppliers.create');
+    Route::delete('/suppliers/{supplier}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
+    Route::put('/suppliers/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update');
+    Route::get('/suppliers/{supplier}/edit', [SupplierController::class, 'edit'])->name('suppliers.edit');
 });
 
 require __DIR__ . '/auth.php';

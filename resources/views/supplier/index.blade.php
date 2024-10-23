@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Usuarios') }}
+            {{ __('Proovedor') }}
         </h2>
     </x-slot>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -9,30 +9,28 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <a href="{{ route('users.create') }}" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded ml-2">Add</a>
+                    <a href="{{ route('suppliers.create') }}" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded ml-2">Add</a>
 
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Rol</th>
+                                <th scope="col">Info de Contacto</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($suppliers as $supplier)
                             <tr>
-                                <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->role }}</td>
+                                <th scope="row">{{ $supplier->id }}</th>
+                                <td>{{ $supplier->name }}</td>
+                                <td>{{ $supplier->contact_info }}</td>
                                 <td>
-                                    <a href="{{ route('users.edit', $user->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    <a href="{{ route('suppliers.edit', $supplier->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         Edit
                                     </a></li>
 
-                                    <form id="deleteUserForm" action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline-block">
+                                    <form id="deleteSupplierForm" action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST" style="display: inline-block">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" id="delete">
                                             Delete
@@ -56,13 +54,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).ready(function() {
-        $('#deleteUserForm').on('submit', function(e) {
+        $('#deleteSupplierForm').on('submit', function(e) {
             e.preventDefault(); // Prevenir el envío del formulario
 
             const form = this; // Guardar referencia al formulario
-
+            
             Swal.fire({
-                title: '¿Estás seguro de eliminar este usuario?',
+                title: '¿Estás seguro de eliminar este Proovedor?',
                 text: "No podrás revertir esta acción",
                 icon: 'warning',
                 showCancelButton: true,
@@ -74,7 +72,7 @@
                 if (result.isConfirmed) {
                     Swal.fire(
                         'Eliminado',
-                        'El usuario ha sido eliminado.',
+                        'El Proovedor ha sido eliminado.',
                         'success'
                     );
 
