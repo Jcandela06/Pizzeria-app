@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PizzaController;
+use App\Models\Pizza;
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,6 +45,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
     Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
     Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+
+    //Rutas Pizzas
+    Route::get('/pizzas', [PizzaController::class, 'index'])->name('pizzas.index');
+    Route::post('/pizzas', [PizzaController::class, 'store'])->name('pizzas.store');
+    Route::get('/pizzas/create', [PizzaController::class, 'create'])->name('pizzas.create');
+
+
 });
 
 require __DIR__ . '/auth.php';
