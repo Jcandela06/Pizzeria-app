@@ -28,7 +28,11 @@
                                 <td>{{ $pizza_size->size }}</td>
                                 <td>{{ $pizza_size->price }}</td>
                                 <td>
-                                <form action="{{ route('pizza_sizes.destroy', $pizza_size->id) }}" method="POST" style="display: inline-block">
+                                    <a href="{{ route('pizza_sizes.edit', $pizza_size->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        Edit
+                                    </a></li>
+
+                                    <form action="{{ route('pizza_sizes.destroy', $pizza_size->id) }}" method="POST" style="display: inline-block">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" id="delete">
                                             Delete

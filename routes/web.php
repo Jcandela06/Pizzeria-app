@@ -78,6 +78,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/pizza_sizes', [Pizza_SizeController::class, 'store'])->name('pizza_sizes.store');
     Route::get('/pizza_sizes/create', [Pizza_SizeController::class, 'create'])->name('pizza_sizes.create');
     Route::delete('/pizza_sizes/{pizza_size}', [Pizza_SizeController::class, 'destroy'])->name('pizza_sizes.destroy');
+    Route::put('/pizza_sizes/{id}', [Pizza_SizeController::class, 'update'])->name('pizza_sizes.update');
+    Route::get('/pizza_sizes/{id}/edit', [Pizza_SizeController::class, 'edit'])->name('pizza_sizes.edit');
+
 });
 
 require __DIR__ . '/auth.php';

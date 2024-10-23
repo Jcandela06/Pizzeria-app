@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pizza;
 use App\Models\Pizza_Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,8 @@ class Pizza_SizeController extends Controller
     public function store(Request $request)
     {
         $pizza_sizes = new Pizza_Size();
-        $pizza_sizes->pizza_id= $request->name;
+        $pizza_sizes->pizza_id = $request->name;
+        $pizza_sizes->size = $request->size;
         $pizza_sizes->price = $request->price;
         $pizza_sizes->save();
 
@@ -54,7 +56,10 @@ class Pizza_SizeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pizza_size = Pizza_Size::find($id);
+        $pizzas = DB::table('pizzas')->get(); 
+        return view('pizza_size.edit', compact('pizza_size', 'pizzas'));
+
     }
 
     /**
@@ -62,7 +67,15 @@ class Pizza_SizeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pizza_sizes = Pizza_Size::find($id);
+        $pizza_sizes->pizza_id = $request->name;
+        $pizza_sizes->size = $request->size;
+        $pizza_sizes->price = $request->price;
+        $pizza_sizes->save();
+
+        $pizza_sizes = DB::table('pizza_size')->get();
+
+        return redirect()->route('pizza_sizes.index')->with('success', 'Tamaño Pizza creado exitosamente.');
     }
 
     /**
