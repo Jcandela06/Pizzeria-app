@@ -9,8 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                <a href="{{ route('branches.create') }}"
-                class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded ml-2">Add</a>
+                    <a href="{{ route('branches.create') }}"
+                        class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded ml-2">Add</a>
                     <table class="table">
                         <thead>
                             <tr>
@@ -26,7 +26,13 @@
                                 <td>{{ $branch->name }}</td>
                                 <td>{{ $branch->address }}</td>
                                 <td>
-                                    
+                                    <form action="{{ route('branches.destroy', $branch->id) }}" method="POST" style="display: inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -63,7 +69,7 @@
                 if (result.isConfirmed) {
                     Swal.fire(
                         'Eliminado',
-                        'El usuario ha sido eliminado.',
+                        'El Pedido ha sido eliminado.',
                         'success'
                     );
 

@@ -70,6 +70,8 @@ class BranchController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $branches = Branch::find($id);
+        $branches->delete();
+        return redirect()->route('branches.index')->with('success', 'Pedido eliminado exitosamente.');
     }
 }
