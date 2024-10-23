@@ -8,6 +8,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\Pizza_SizeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -71,6 +72,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/branches/{branch}', [BranchController::class, 'destroy'])->name('branches.destroy');
     Route::put('/branches/{branch}', [BranchController::class, 'update'])->name('branches.update');
     Route::get('/branches/{branch}/edit', [BranchController::class, 'edit'])->name('branches.edit');
+
+    //Rutas Tamaño Pizza
+    Route::get('/pizza_sizes', [Pizza_SizeController::class, 'index'])->name('pizza_sizes.index');
+    
 });
 
 require __DIR__ . '/auth.php';

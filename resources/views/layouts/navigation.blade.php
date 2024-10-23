@@ -104,6 +104,10 @@
                                 {{ __('Pizzas') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link :href="route('pizza_sizes.index')">
+                                {{ __('Tamaño Pizza') }}
+                            </x-dropdown-link>
+
                         </x-slot>
 
 
