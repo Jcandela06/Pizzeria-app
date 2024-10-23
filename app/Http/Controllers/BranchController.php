@@ -52,7 +52,8 @@ class BranchController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $branch = Branch::find($id);  
+        return view('branch.edit', compact('branch'));
     }
 
     /**
@@ -60,7 +61,12 @@ class BranchController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $branches = Branch::find($id);
+        $branches->name = $request->name;
+        $branches->address = $request->address;
+        $branches->save();
+        $branches = DB::table('branches')->get();
+        return redirect()->route('branches.index')->with('success', 'Pedido editado exitosamente.');
     }
 
     /**

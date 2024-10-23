@@ -49,7 +49,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/branches', [BranchController::class, 'index'])->name('branches.index');
     Route::post('/branches', [BranchController::class, 'store'])->name('branches.store');
     Route::get('/branches/create', [BranchController::class, 'create'])->name('branches.create');
-    Route::delete('/branches/{branche}', [BranchController::class, 'destroy'])->name('branches.destroy');
+    Route::delete('/branches/{branch}', [BranchController::class, 'destroy'])->name('branches.destroy');
+    Route::put('/branches/{branch}', [BranchController::class, 'update'])->name('branches.update');
+    Route::get('/branches/{branch}/edit', [BranchController::class, 'edit'])->name('branches.edit');
 });
 
 require __DIR__ . '/auth.php';
