@@ -86,6 +86,10 @@
                                 {{ __('Compras') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link :href="route('pizza_raw_materials.index')">
+                                {{ __('Materiales Pizza') }}
+                            </x-dropdown-link>
+
                         </x-slot>
                     </x-dropdown>
                 </div>

@@ -9,6 +9,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\Pizza_raw_materialController;
 use App\Http\Controllers\Raw_materialController;
 use App\Http\Controllers\PurchaseController;
 
@@ -99,6 +100,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/purchases/{purchase}', [PurchaseController::class, 'destroy'])->name('purchases.destroy');
     Route::put('/purchases/{purchase}', [PurchaseController::class, 'update'])->name('purchases.update');
     Route::get('/purchases/{purchase}/edit', [PurchaseController::class, 'edit'])->name('purchases.edit');
+
+    //Rutas Compras
+    Route::get('/pizza_raw_materials', [Pizza_raw_materialController::class, 'index'])->name('pizza_raw_materials.index');
+    Route::post('/pizza_raw_materials', [Pizza_raw_materialController::class, 'store'])->name('pizza_raw_materials.store');
+    Route::get('/pizza_raw_materials/create', [Pizza_raw_materialController::class, 'create'])->name('pizza_raw_materials.create');
+    Route::delete('/pizza_raw_materials/{pizza_raw_material}', [Pizza_raw_materialController::class, 'destroy'])->name('pizza_raw_materials.destroy');
+    Route::put('/pizza_raw_materials/{pizza_raw_material}', [Pizza_raw_materialController::class, 'update'])->name('pizza_raw_materials.update');
+    Route::get('/pizza_raw_materials/{pizza_raw_material}/edit', [Pizza_raw_materialController::class, 'edit'])->name('pizza_raw_materials.edit');
 });
 
 require __DIR__ . '/auth.php';

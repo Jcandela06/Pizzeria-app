@@ -31,7 +31,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        quantity	purchase_price	purchase_date
+
                         <div class="mb-3">
                             <label for="quantity" class="form-label">Cantidad</label>
                             <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Cantidad">
