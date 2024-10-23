@@ -22,8 +22,7 @@ class BranchController extends Controller
      */
     public function create()
     {
-        $branches = DB::table('branches');
-        return view('branch.new', ['branches' => $branches]);
+        //
     }
 
     /**
@@ -31,14 +30,7 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
-        $branches = new Branch();
-        $branches->name = $request->name;
-        $branches->address = $request->address;
-        $branches->save();
-
-        $branches = DB::table('branches')->get();
-
-        return redirect()->route('branches.index')->with('success', 'Pedido creado exitosamente.');
+        //
     }
 
     /**
