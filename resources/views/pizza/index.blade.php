@@ -9,25 +9,31 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                <a href="{{ route('pizzas.create') }}" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded ml-2">Add</a>
+                    <a href="{{ route('pizzas.create') }}" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded ml-2">Add</a>
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
                                 <th scope="col">Nombre</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($pizzas as $pizza)
-                                <tr>
-                                    <th scope="row">{{ $pizza->id }}</th>
-                                    <td>{{ $pizza->name }}</td>
-                                    <td>
-                                    
+                            <tr>
+                                <th scope="row">{{ $pizza->id }}</th>
+                                <td>{{ $pizza->name }}</td>
+                                <td>
+
+                                    <form action="{{ route('pizzas.destroy', $pizza->id) }}" method="POST" style="display: inline-block">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" id="delete">
+                                            Delete
+                                        </button>
+
                                     </form>
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -36,3 +42,36 @@
         </div>
     </div>
 </x-app-layout>
+
+<!-- Alerta para eliminar usuario -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function() {
+        $('form').on('submit', function(e) {
+            e.preventDefault(); // Prevenir el envío del formulario
+            const form = this; // Guardar referencia al formulario
+            Swal.fire({
+                title: '¿Estás seguro de eliminar esta pizza?',
+                text: "No podrás revertir esta acción",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Eliminado',
+                        'La pizza ha sido eliminada.',
+                        'success'
+                    );
+                    form.submit(); // Enviar el formulario si se confirma
+                }
+            });
+        });
+    });
+</script>

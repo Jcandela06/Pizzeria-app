@@ -55,7 +55,7 @@
                         toast.onmouseleave = Swal.resumeTimer;
                     }
                 });
-                $('#floatingName').focus();
+                $('#name').focus();
                 Toast.fire({
                     icon: "error",
                     title: "Completa todos los campos."
