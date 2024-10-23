@@ -24,6 +24,9 @@
                                 <th scope="row">{{ $pizza->id }}</th>
                                 <td>{{ $pizza->name }}</td>
                                 <td>
+                                    <a href="{{ route('pizzas.edit', $pizza->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        Edit
+                                    </a></li>
 
                                     <form action="{{ route('pizzas.destroy', $pizza->id) }}" method="POST" style="display: inline-block">
                                         @csrf @method('DELETE')
