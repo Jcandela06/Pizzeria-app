@@ -82,6 +82,10 @@
                                 {{ __('Materiales') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link :href="route('purchases.index')">
+                                {{ __('Compras') }}
+                            </x-dropdown-link>
+
                         </x-slot>
                     </x-dropdown>
                 </div>
