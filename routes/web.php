@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\PizzaController;
+use App\Models\Pizza;
 
 Route::get('/', function () {
     return view('welcome');
@@ -52,6 +54,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/suppliers/{supplier}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
     Route::put('/suppliers/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update');
     Route::get('/suppliers/{supplier}/edit', [SupplierController::class, 'edit'])->name('suppliers.edit');
+    
+    //Rutas Pizzas
+    Route::get('/pizzas', [PizzaController::class, 'index'])->name('pizzas.index');
+    Route::post('/pizzas', [PizzaController::class, 'store'])->name('pizzas.store');
+    Route::get('/pizzas/create', [PizzaController::class, 'create'])->name('pizzas.create');
+    Route::delete('/pizzas/{pizza}', [PizzaController::class, 'destroy'])->name('pizzas.destroy');
+    Route::put('/pizzas/{pizza}', [PizzaController::class, 'update'])->name('pizzas.update');
+    Route::get('/pizzas/{pizza}/edit', [PizzaController::class, 'edit'])->name('pizzas.edit');
+
+
 });
 
 require __DIR__ . '/auth.php';
