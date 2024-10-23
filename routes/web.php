@@ -8,6 +8,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\IngredientController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -71,6 +72,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/branches/{branch}', [BranchController::class, 'destroy'])->name('branches.destroy');
     Route::put('/branches/{branch}', [BranchController::class, 'update'])->name('branches.update');
     Route::get('/branches/{branch}/edit', [BranchController::class, 'edit'])->name('branches.edit');
+
+
+    //Rutas Ingredientes
+    Route::get('/ingredients', [IngredientController::class, 'index'])->name('ingredients.index');
+    Route::post('/ingredients', [IngredientController::class, 'store'])->name('ingredients.store');
+    Route::get('/ingredients/create', [IngredientController::class, 'create'])->name('ingredients.create');
+    Route::delete('/ingredients/{ingredient}', [IngredientController::class, 'destroy'])->name('ingredients.destroy');
+    Route::put('/ingredients/{ingredient}', [IngredientController::class, 'update'])->name('ingredients.update');
+    Route::get('/ingredients/{ingredient}/edit', [IngredientController::class, 'edit'])->name('ingredients.edit');
 });
 
 require __DIR__ . '/auth.php';
