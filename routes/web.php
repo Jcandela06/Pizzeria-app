@@ -9,6 +9,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\Raw_materialController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,7 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/suppliers/{supplier}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
     Route::put('/suppliers/{supplier}', [SupplierController::class, 'update'])->name('suppliers.update');
     Route::get('/suppliers/{supplier}/edit', [SupplierController::class, 'edit'])->name('suppliers.edit');
-    
+
     //Rutas Pizzas
     Route::get('/pizzas', [PizzaController::class, 'index'])->name('pizzas.index');
     Route::post('/pizzas', [PizzaController::class, 'store'])->name('pizzas.store');
@@ -81,6 +82,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/ingredients/{ingredient}', [IngredientController::class, 'destroy'])->name('ingredients.destroy');
     Route::put('/ingredients/{ingredient}', [IngredientController::class, 'update'])->name('ingredients.update');
     Route::get('/ingredients/{ingredient}/edit', [IngredientController::class, 'edit'])->name('ingredients.edit');
+
+    //Rutas Materiales
+    Route::get('/raw_materials', [Raw_materialController::class, 'index'])->name('raw_materials.index');
+    Route::post('/raw_materials', [Raw_materialController::class, 'store'])->name('raw_materials.store');
+    Route::get('/raw_materials/create', [Raw_materialController::class, 'create'])->name('raw_materials.create');
+    Route::delete('/raw_materials/{raw_material}', [Raw_materialController::class, 'destroy'])->name('raw_materials.destroy');
+    Route::put('/raw_materials/{raw_material}', [Raw_materialController::class, 'update'])->name('raw_materials.update');
+    Route::get('/raw_materials/{raw_material}/edit', [Raw_materialController::class, 'edit'])->name('raw_materials.edit');
 });
 
 require __DIR__ . '/auth.php';
