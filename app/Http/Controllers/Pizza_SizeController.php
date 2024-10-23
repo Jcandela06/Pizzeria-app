@@ -70,6 +70,8 @@ class Pizza_SizeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pizza_sizes = Pizza_Size::find($id);
+        $pizza_sizes->delete();
+        return redirect()->route('pizza_sizes.index')->with('success', 'Pizza eliminado exitosamente.');
     }
 }

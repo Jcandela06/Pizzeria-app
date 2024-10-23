@@ -28,7 +28,12 @@
                                 <td>{{ $pizza_size->size }}</td>
                                 <td>{{ $pizza_size->price }}</td>
                                 <td>
-
+                                <form action="{{ route('pizza_sizes.destroy', $pizza_size->id) }}" method="POST" style="display: inline-block">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" id="delete">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -53,7 +58,7 @@
             const form = this; // Guardar referencia al formulario
 
             Swal.fire({
-                title: '¿Estás seguro de eliminar este usuario?',
+                title: '¿Estás seguro de eliminar este Tamaño?',
                 text: "No podrás revertir esta acción",
                 icon: 'warning',
                 showCancelButton: true,
