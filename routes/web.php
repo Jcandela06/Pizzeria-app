@@ -122,6 +122,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/extraingredient', [ExtraIngredientController::class, 'index'])->name('extraingredient.index');
     Route::get('/extraingredient/create', [ExtraIngredientController::class, 'create'])->name('extraingredient.create');
     Route::post('/extraingredient', [ExtraIngredientController::class, 'store'])->name('extraingredient.store');
+    Route::get('/extraingredient/{id}/edit', [ExtraIngredientController::class, 'edit'])->name('extraingredient.edit'); 
+    Route::put('/extraingredient/{id}', [ExtraIngredientController::class, 'update'])->name('extraingredient.update');
+    Route::delete('/extraingredient/{id}', [ExtraIngredientController::class, 'destroy'])->name('extraingredient.destroy');
 
 
 });

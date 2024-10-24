@@ -59,7 +59,7 @@ class ExtraIngredientController extends Controller
     public function edit(string $id)
     {
         $extraIngredient = ExtraIngredient::find($id); 
-        return view('extraIngredient.edit', compact('extraIngredient'));
+        return view('extraingredient.edit', compact('extraIngredient'));
     }
 
     /**
@@ -69,8 +69,9 @@ class ExtraIngredientController extends Controller
     {
         $extraIngredient = ExtraIngredient::find($id);
         $extraIngredient->name = $request->name; 
+        $extraIngredient->price = $request->price; 
         $extraIngredient->save();
-        return redirect()->route('extraIngredients.index')->with('success', 'Extra ingrediente editado exitosamente.');
+        return redirect()->route('extraingredient.index')->with('success', 'Extra ingrediente editado exitosamente.');
     }
 
     /**
@@ -79,7 +80,13 @@ class ExtraIngredientController extends Controller
     public function destroy(string $id)
     {
         $extraIngredient = ExtraIngredient::find($id);
-        $extraIngredient->delete();
-        return redirect()->route('extraIngredients.index')->with('success', 'Extra ingrediente eliminado exitosamente.');
+        if ($extraIngredient) {
+            
+            $extraIngredient->delete();
+    
+            return redirect()->route('extraingredient.index')->with('success', 'Ingrediente eliminado con éxito.');
+        } else {
+            return redirect()->route('extraingredient.index')->with('error', 'Ingrediente no encontrado.');
+        }
     }
 }

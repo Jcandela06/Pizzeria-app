@@ -25,7 +25,13 @@
                                 <th scope="row">{{ $extraIngredient->id }}</th>
                                 <td>{{ $extraIngredient->name }}</td>
                                 <td>{{ $extraIngredient->price }}</td>
-                               
+                                <td>
+                                    <a href="{{ route('extraingredient.edit', $extraIngredient->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+                                    <form action="{{ route('extraingredient.destroy', $extraIngredient->id) }}" method="POST" style="display: inline-block">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" id="delete">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
