@@ -14,6 +14,7 @@ use App\Http\Controllers\Raw_materialController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\Pizza_SizeController;
 use App\Http\Controllers\ExtraIngredientController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -125,6 +126,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/extraingredient/{id}/edit', [ExtraIngredientController::class, 'edit'])->name('extraingredient.edit'); 
     Route::put('/extraingredient/{id}', [ExtraIngredientController::class, 'update'])->name('extraingredient.update');
     Route::delete('/extraingredient/{id}', [ExtraIngredientController::class, 'destroy'])->name('extraingredient.destroy');
+
+    //Rutas Ordenes
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 
 
 });
