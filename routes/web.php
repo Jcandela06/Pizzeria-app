@@ -13,6 +13,7 @@ use App\Http\Controllers\Pizza_raw_materialController;
 use App\Http\Controllers\Raw_materialController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\Pizza_SizeController;
+use App\Http\Controllers\Pizza_IngredientController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -117,6 +118,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/pizza_sizes/{id}', [Pizza_SizeController::class, 'update'])->name('pizza_sizes.update');
     Route::get('/pizza_sizes/{id}/edit', [Pizza_SizeController::class, 'edit'])->name('pizza_sizes.edit');
 
+    //Rutas Pizza_Ingredients
+    Route::get('/pizza_ingredients', [Pizza_IngredientController::class, 'index'])->name('pizza_ingredients.index');
+    Route::post('/pizza_Ingredients', [Pizza_IngredientController::class, 'store'])->name('pizza_ingredients.store');
+    Route::get('/pizza_Ingredients/create', [Pizza_IngredientController::class, 'create'])->name('pizza_ingredients.create');
+    Route::delete('/pizza_Ingredients/{pizza_Ingredient}', [Pizza_IngredientController::class, 'destroy'])->name('pizza_ingredients.destroy');
+    Route::put('/pizza_Ingredients/{pizza_Ingredient}', [Pizza_IngredientController::class, 'update'])->name('pizza_ingredients.update');
+    Route::get('/pizza_Ingredients/{pizza_Ingredient}/edit', [Pizza_IngredientController::class, 'edit'])->name('pizza_ingredients.edit');
 });
 
 require __DIR__ . '/auth.php';
