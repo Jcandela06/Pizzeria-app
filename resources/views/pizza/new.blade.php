@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form id="pizzaForm" method="POST" action="{{ route('pizzas.store') }}">
+                    <form method="POST" action="{{ route('pizzas.store') }}">
                         @csrf
                         <div class="mb-3">
                             <label for="id" class="form-label">Id</label>
@@ -38,7 +38,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#pizzaForm').on('submit', function(e) {
+        $('form').on('submit', function(e) {
             e.preventDefault();
             // Variables de los campos
             var name = $('#name').val();
@@ -55,7 +55,7 @@
                         toast.onmouseleave = Swal.resumeTimer;
                     }
                 });
-                $('#pizzaForm').focus();
+                $('#name').focus();
                 Toast.fire({
                     icon: "error",
                     title: "Completa todos los campos."
@@ -70,7 +70,7 @@
                 timer: 1500
             }).then(function() {
                 // Si todo es correcto, proceder con el envío del formulario
-                $('#pizzaForm').unbind('submit').submit();
+                $('form').unbind('submit').submit();
             });
 
         });

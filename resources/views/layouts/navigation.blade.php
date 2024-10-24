@@ -108,6 +108,11 @@
                                 {{ __('Ingredientes') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link :href="route('pizza_ingredients.index')">
+                                {{ __('Pizza e Ingredientes') }}
+                            </x-dropdown-link>
+
+
                         </x-slot>
 
 
