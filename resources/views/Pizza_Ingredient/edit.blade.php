@@ -51,4 +51,44 @@
     </div>
 </x-app-layout>
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#editPizza_IngredientForm').on('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe inmediatamente
+            let pizza_id = $('#pizza_id').val();
+            let ingredient_id = $('#ingredient_id').val();
+            // Validación de campos vacíos
+            if (!pizza_id || !ingredient_id) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                $('#editPizza_IngredientForm').focus();
+                Toast.fire({
+                    icon: "error",
+                    title: "Completa todos los campos."
+                });
+                return;
+            }
+            // Si todas las validaciones son correctas, enviar el formulario
+            Swal.fire({
+                icon: 'success',
+                title: 'Material Pizza editada con éxito',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                // Si todo es correcto, proceder con el envío del formulario
+                $('#editPizza_IngredientForm').unbind('submit').submit();
+            });
+        });
+    });
+</script>

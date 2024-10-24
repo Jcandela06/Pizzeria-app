@@ -33,7 +33,7 @@
 
                         <div class="mt-3">
                             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
-                            <a href="{{ route('employees.index') }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded ml-2">Cancel</a>
+                            <a href="{{ route('pizza_ingredients.index') }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded ml-2">Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -41,3 +41,46 @@
         </div>
     </div>
 </x-app-layout>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#Pizza_IngredientForm').on('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe inmediatamente
+            let pizza_id = $('#pizza_id').val();
+            let ingredient_id = $('#ingredient_id').val();
+            // Validación de campos vacíos
+            if (!pizza_id || !ingredient_id) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                $('#pizza_id').focus();
+                Toast.fire({
+                    icon: "error",
+                    title: "Completa todos los campos."
+                });
+                return;
+            }
+            // Si todas las validaciones son correctas, enviar el formulario
+            Swal.fire({
+                icon: 'success',
+                title: 'Material Pizza creado con éxito',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                // Si todo es correcto, proceder con el envío del formulario
+                $('#Pizza_IngredientForm').unbind('submit').submit();
+            });
+        });
+    });
+</script>
