@@ -28,18 +28,26 @@ class OrderController extends Controller
     // Almacena un nuevo pedido
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'client_id' => 'required|integer|exists:clients,id', 
-            'branch_id' => 'required|integer|exists:branches,id', 
-            'total_price' => 'required|numeric|min:0',
-            'status' => 'required|string|in:pendiente,en_preparacion,listo,entregado',
-            'delivery_type' => 'required|string|in:en_local,a_domicilio',
-            'delivery_person_id' => 'nullable|integer|exists:employees,id' 
+        // Validar los campos necesarios
+        $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'branch_id' => 'required|exists:branches,id',
+            'total_price' => 'required|numeric',
+            'status' => 'required|string|max:255',
+            'delivery_type' => 'required|string|max:255',
+            'delivery_person_id' => 'nullable|exists:employees,id',
         ]);
     
-        Order::create($validatedData);
-    
-        return redirect()->route('orders.index')->with('success', 'Pedido creado exitosamente.'); 
+        $order = Order::create([
+            'client_id' => $request->client_id,
+            'branch_id' => $request->branch_id,
+            'total_price' => $request->total_price,
+            'status' => $request->status,
+            'delivery_type' => $request->delivery_type,
+            'delivery_person_id' => $request->delivery_person_id,
+        ]);
+
+        return redirect()->route('orders.index')->with('success', 'Pedido creado exitosamente.');
     }
 
     // Muestra los detalles de un pedido específico
