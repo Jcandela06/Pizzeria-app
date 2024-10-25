@@ -24,7 +24,31 @@
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
-                        
+                        <tbody>
+                            @foreach ($orders as $order)
+                            <tr>
+                                <th scope="row">{{ $order->id }}</th>
+                                <td>{{ $order->client_id }}</td>
+                                <td>{{ $order->branch_id }}</td>
+                                <td>${{ number_format($order->total_price, 2) }}</td>
+                                <td>{{ $order->status }}</td>
+                                <td>{{ $order->delivery_type }}</td>
+                                <td>
+                                    <a href="{{ route('orders.edit', $order->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                        Editar
+                                    </a>
+
+                                    <form action="{{ route('orders.destroy', $order->id) }}" method="POST" style="display: inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" id="delete">
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>

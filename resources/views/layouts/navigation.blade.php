@@ -128,6 +128,11 @@
                                 {{ __('Ingredientes Extra') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link :href="route('orders.index')">
+                                {{ __('Ordenes') }}
+                            </x-dropdown-link>
+
+
 
                         </x-slot>
 
