@@ -25,6 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            Z
                             @foreach ($orders as $order)
                             <tr>
                                 <th scope="row">{{ $order->id }}</th>

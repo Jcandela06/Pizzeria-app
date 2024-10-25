@@ -11,9 +11,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('orders.store') }}" method="POST">
+                    <form action="/orders" method="POST">
                         @csrf
-                        
+
                         <div class="mb-3">
                             <label for="client_id" class="form-label">Cliente</label>
                             <input type="text" class="form-control" id="client_id" name="client_id" required>
