@@ -124,13 +124,14 @@
                                 {{ __('Tamaño Pizza') }}
                             </x-dropdown-link>
 
-<<<<<<< HEAD
-=======
                             <x-dropdown-link :href="route('pizza_ingredients.index')">
                                 {{ __('Pizza e Ingredientes') }}
                             </x-dropdown-link>
 
->>>>>>> Alejandro
+                            <x-dropdown-link :href="route('extraingredient.index')">
+                                {{ __('Ingredientes Extra') }}
+                            </x-dropdown-link>
+
 
                         </x-slot>
 

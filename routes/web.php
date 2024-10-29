@@ -14,6 +14,7 @@ use App\Http\Controllers\Raw_materialController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\Pizza_SizeController;
 use App\Http\Controllers\Pizza_IngredientController;
+use App\Http\Controllers\ExtraIngredientController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -125,6 +126,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/pizza_Ingredients/{pizza_Ingredient}', [Pizza_IngredientController::class, 'destroy'])->name('pizza_ingredients.destroy');
     Route::put('/pizza_Ingredients/{pizza_Ingredient}', [Pizza_IngredientController::class, 'update'])->name('pizza_ingredients.update');
     Route::get('/pizza_Ingredients/{pizza_Ingredient}/edit', [Pizza_IngredientController::class, 'edit'])->name('pizza_ingredients.edit');
+
+    //Rutas Ingrediente Extra
+    Route::get('/extraingredient', [ExtraIngredientController::class, 'index'])->name('extraingredient.index');
+    Route::get('/extraingredient/create', [ExtraIngredientController::class, 'create'])->name('extraingredient.create');
+    Route::post('/extraingredient', [ExtraIngredientController::class, 'store'])->name('extraingredient.store');
+    Route::get('/extraingredient/{id}/edit', [ExtraIngredientController::class, 'edit'])->name('extraingredient.edit'); 
+    Route::put('/extraingredient/{id}', [ExtraIngredientController::class, 'update'])->name('extraingredient.update');
+    Route::delete('/extraingredient/{id}', [ExtraIngredientController::class, 'destroy'])->name('extraingredient.destroy');
+    
 });
 
 require __DIR__ . '/auth.php';
