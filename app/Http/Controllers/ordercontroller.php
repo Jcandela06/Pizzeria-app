@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\Client;
+use App\Models\Employee;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
@@ -11,26 +13,11 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        $orders = DB::table('orders')
-            ->join('clients', 'orders.client_id', '=', 'clients.id')   
-            ->join('users', 'clients.user_id', '=', 'users.id')         
-            ->join('branches', 'orders.branch_id', '=', 'branches.id') 
-            ->leftJoin('employees', 'orders.delivery_person_id', '=', 'employees.id') 
-            ->select(
-                'orders.id as code',                 
-                'users.name as client_name',          
-                'branches.name as branch_name',
-                'orders.total_price',                 
-                'orders.status',                       
-                'orders.delivery_type',                  
-                'employees.id as employee_id')
-            ->get();
-
+        $orders = Order::with(['client.user', 'branch', 'deliveryPerson.user'])->get();
         return view('order.index', ['orders' => $orders]);
-
-
     }
 
     /**
@@ -38,23 +25,15 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $users = DB::table('clients')
-            ->join('users', 'clients.user_id', '=', 'users.id') 
-            ->select('clients.id', 'users.name') 
-            ->orderBy('users.name') 
-        ->get();
+        $clients = Client::with('user')->get();
+        $employees = Employee::with('user')->get();
+        $branches = DB::table('branches')->get();
 
-        $branches = DB::table('branches')
-            ->select('id', 'name') 
-            ->orderBy('name') 
-            ->get();
-
-        $employees = DB::table('employees')
-            ->select('id')
-            ->orderBy('id')
-            ->get();
-        
-        return view('order.create', ['users' => $users, 'branches' => $branches, 'employees' => $employees]);      
+        return view('order.new', [
+            'clients' => $clients,
+            'employees' => $employees,
+            'branches' => $branches,
+        ]);
     }
 
     /**
@@ -62,41 +41,17 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'client' => 'required|exists:clients,id',
-            'branch' => 'required|exists:branches,id',
-            'totalPrice' => 'required|numeric',
-            'status' => 'required|string',
-            'deliveryType' => 'required|string',
-            'employee' => 'required|exists:employees,id',
-        ]);
-
         $order = new Order();
 
-        $order->client_id = $request->client;
-        $order->branch_id = $request->branch;
-        $order->total_price = $request->totalPrice;
+        $order->client_id = $request->client_id;
+        $order->branch_id = $request->branch_id;
+        $order->total_price = $request->total_price;
         $order->status = $request->status;
-        $order->delivery_type = $request->deliveryType;
-        $order->delivery_person_id = $request->employee;
+        $order->delivery_type = $request->delivery_type;
+        $order->delivery_person_id = $request->employee_id; // Cambiado a delivery_person_id
         $order->save();
 
-        $orders = DB::table('orders')
-            ->join('clients', 'orders.client_id', '=', 'clients.id')   
-            ->join('users', 'clients.user_id', '=', 'users.id')         
-            ->join('branches', 'orders.branch_id', '=', 'branches.id') 
-            ->leftJoin('employees', 'orders.delivery_person_id', '=', 'employees.id') 
-            ->select(
-                'orders.id as code',                 
-                'users.name as client_name',          
-                'branches.name as branch_name',
-                'orders.total_price',                  
-                'orders.status',                       
-                'orders.delivery_type',                     
-                'employees.id as employee_id')
-            ->get();
-
-        return view('order.index', ['orders' => $orders]);
+        return redirect()->route('orders.index')->with('success', 'Orden creada exitosamente.');
     }
 
     /**
@@ -112,25 +67,21 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
+        // Encuentra la orden especificada
         $order = Order::find($id);
 
-        $users = DB::table('clients')
-            ->join('users', 'clients.user_id', '=', 'users.id') 
-            ->select('clients.id', 'users.name') 
-            ->orderBy('users.name') 
-        ->get();
+        // Obtener todos los clientes, empleados y sucursales para los select
+        $clients = Client::with('user')->get();
+        $employees = Employee::with('user')->get();
+        $branches = DB::table('branches')->get();
 
-        $branches = DB::table('branches')
-            ->select('id', 'name') 
-            ->orderBy('name') 
-            ->get();
-
-        $employees = DB::table('employees')
-            ->select('id')
-            ->orderBy('id')
-            ->get();
-        
-        return view('order.edit', ['order' => $order, 'users' => $users, 'branches' => $branches, 'employees' => $employees]);  
+        // Retornar la vista de edición con todas las variables necesarias
+        return view('order.edit', [
+            'order' => $order, // Asegúrate de pasar $order aquí
+            'clients' => $clients,
+            'employees' => $employees,
+            'branches' => $branches,
+        ]);
     }
 
     /**
@@ -138,41 +89,19 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'client' => 'required|exists:clients,id',
-            'branch' => 'required|exists:branches,id',
-            'totalPrice' => 'required|numeric',
-            'status' => 'required|string',
-            'deliveryType' => 'required|string',
-            'employee' => 'required|exists:employees,id',
-        ]);
-        
         $order = Order::find($id);
 
-        $order->client_id = $request->client;
-        $order->branch_id = $request->branch;
-        $order->total_price = $request->totalPrice;
+        $order->client_id = $request->client_id;
+        $order->branch_id = $request->branch_id;
+        $order->total_price = $request->total_price;
         $order->status = $request->status;
-        $order->delivery_type = $request->deliveryType;
-        $order->delivery_person_id = $request->employee;
+        $order->delivery_type = $request->delivery_type;
+        $order->delivery_person_id = $request->employee_id; // Cambiado a delivery_person_id
         $order->save();
 
-        $orders = DB::table('orders')
-            ->join('clients', 'orders.client_id', '=', 'clients.id')   
-            ->join('users', 'clients.user_id', '=', 'users.id')         
-            ->join('branches', 'orders.branch_id', '=', 'branches.id') 
-            ->leftJoin('employees', 'orders.delivery_person_id', '=', 'employees.id') 
-            ->select(
-                'orders.id as code',                 
-                'users.name as client_name',          
-                'branches.name as branch_name',
-                'orders.total_price',                  
-                'orders.status',                       
-                'orders.delivery_type',                     
-                'employees.id as employee_id')
-            ->get();
+        $orders = DB::table('orders')->get();
 
-        return view('order.index', ['orders' => $orders]);
+        return redirect()->route('orders.index')->with('success', 'Orden creada exitosamente.');
     }
 
     /**
@@ -181,13 +110,7 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         $order = Order::find($id);
-    
-        if (!$order) {
-            return redirect()->route('orders.index')->with('error', 'Pedido no encontrado.');
-        }
-    
         $order->delete();
-    
-        return redirect()->route('orders.index')->with('success', 'Pedido eliminado con éxito.');
+        return redirect()->route('orders.index')->with('success', 'Orden eliminada exitosamente.');
     }
 }

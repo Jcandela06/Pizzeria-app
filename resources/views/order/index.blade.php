@@ -15,24 +15,25 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col">Id</th>
                                 <th scope="col">Cliente</th>
                                 <th scope="col">Sucursal</th>
                                 <th scope="col">Precio Total</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Tipo de Entrega</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col">Empleado</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($orders as $order)
                             <tr>
                                 <th scope="row">{{ $order->id }}</th>
-                                <td>{{ $order->client_id }}</td>
-                                <td>{{ $order->branch_id }}</td>
+                                <td>{{ $order->client->user->name ?? 'Sin asignar' }}</td>
+                                <td>{{ $order->branch->name }}</td>
                                 <td>${{ number_format($order->total_price, 2) }}</td>
                                 <td>{{ $order->status }}</td>
                                 <td>{{ $order->delivery_type }}</td>
+                                <td>{{ $order->deliveryPerson->user->name ?? 'Sin asignar' }}</td>
                                 <td>
                                     <a href="{{ route('orders.edit', $order->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         Editar
