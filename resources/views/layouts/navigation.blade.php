@@ -163,6 +163,14 @@
                                 {{ __('Ordenes') }}
                             </x-dropdown-link>
 
+                            <x-dropdown-link :href="route('order_pizzas.index')">
+                                {{ __('Ordenes de pizza') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('order_extra_ingredients.index')">
+                                {{ __('Ordenes de ingredientes Extra') }}
+                            </x-dropdown-link>
+
                         </x-slot>
 
                     </x-dropdown>
