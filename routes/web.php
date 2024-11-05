@@ -16,7 +16,7 @@ use App\Http\Controllers\Pizza_SizeController;
 use App\Http\Controllers\Pizza_IngredientController;
 use App\Http\Controllers\ExtraIngredientController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\Order_Extra_IngredientController;
+
 
 Route::get('/', function () {
     return view('welcome');
