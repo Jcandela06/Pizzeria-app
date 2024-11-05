@@ -15,8 +15,9 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\Pizza_SizeController;
 use App\Http\Controllers\Pizza_IngredientController;
 use App\Http\Controllers\ExtraIngredientController;
+use App\Http\Controllers\Order_PizzaController;
 use App\Http\Controllers\OrderController;
-
+use App\Models\Order_pizza;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,7 +31,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
 
     //Rutas Usuarios
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
@@ -72,7 +72,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/pizzas/{pizza}', [PizzaController::class, 'update'])->name('pizzas.update');
     Route::get('/pizzas/{pizza}/edit', [PizzaController::class, 'edit'])->name('pizzas.edit');
 
-
     //Rutas Branches
     Route::get('/branches', [BranchController::class, 'index'])->name('branches.index');
     Route::post('/branches', [BranchController::class, 'store'])->name('branches.store');
@@ -80,7 +79,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/branches/{branch}', [BranchController::class, 'destroy'])->name('branches.destroy');
     Route::put('/branches/{branch}', [BranchController::class, 'update'])->name('branches.update');
     Route::get('/branches/{branch}/edit', [BranchController::class, 'edit'])->name('branches.edit');
-
 
     //Rutas Ingredientes
     Route::get('/ingredients', [IngredientController::class, 'index'])->name('ingredients.index');
@@ -113,6 +111,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/pizza_raw_materials/{pizza_raw_material}', [Pizza_raw_materialController::class, 'destroy'])->name('pizza_raw_materials.destroy');
     Route::put('/pizza_raw_materials/{pizza_raw_material}', [Pizza_raw_materialController::class, 'update'])->name('pizza_raw_materials.update');
     Route::get('/pizza_raw_materials/{pizza_raw_material}/edit', [Pizza_raw_materialController::class, 'edit'])->name('pizza_raw_materials.edit');
+
     //Rutas Tamaño Pizza
     Route::get('/pizza_sizes', [Pizza_SizeController::class, 'index'])->name('pizza_sizes.index');
     Route::post('/pizza_sizes', [Pizza_SizeController::class, 'store'])->name('pizza_sizes.store');
@@ -144,6 +143,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
     Route::put('/orders/{order}', [OrderController::class, 'update'])->name('orders.update');
     Route::get('/orders/{order}/edit', [OrderController::class, 'edit'])->name('orders.edit');
+
+    //Rutas Ordenes Pizza
+    Route::get('/order_pizzas', [Order_PizzaController::class, 'index'])->name('order_pizzas.index');
+    Route::post('/order_pizzas', [Order_PizzaController::class, 'store'])->name('order_pizzas.store');
+    Route::get('/order_pizzas/create', [Order_PizzaController::class, 'create'])->name('order_pizzas.create');
+    Route::delete('/order_pizzas/{order_pizza}', [Order_PizzaController::class, 'destroy'])->name('order_pizzas.destroy');
+    Route::put('/order_pizzas/{order_pizza}', [Order_PizzaController::class, 'update'])->name('order_pizzas.update');
+    Route::get('/order_pizzas/{order_pizza}/edit', [Order_PizzaController::class, 'edit'])->name('order_pizzas.edit');
+
 
 });
 
