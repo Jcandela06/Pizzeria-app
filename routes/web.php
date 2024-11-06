@@ -18,7 +18,6 @@ use App\Http\Controllers\ExtraIngredientController;
 use App\Http\Controllers\Order_extra_ingredientController;
 use App\Http\Controllers\Order_PizzaController;
 use App\Http\Controllers\OrderController;
-use App\Models\Order_pizza;
 
 Route::get('/', function () {
     return view('welcome');
@@ -160,7 +159,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/order_extra_ingredients/{order_extra_ingredient}', [Order_extra_ingredientController::class, 'destroy'])->name('order_extra_ingredients.destroy');
     Route::put('/order_extra_ingredients/{order_extra_ingredient}', [Order_extra_ingredientController::class, 'update'])->name('order_extra_ingredients.update');
     Route::get('/order_extra_ingredients/{order_extra_ingredient}/edit', [Order_extra_ingredientController::class, 'edit'])->name('order_extra_ingredients.edit');
-
+    
 
 });
 
