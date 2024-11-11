@@ -35,7 +35,10 @@
                         <div class="mb-3">
                             <label for="role" class="form-label">Rol</label>
                             <select class="form-control" id="role" name="role" placeholder="Rol" required>
-                                <option value="empleado">Empleado</option>
+                                <option value="admin">Admin</option>
+                                <option value="cajero">Cajero</option>
+                                <option value="cocinero">Cocinero</option>
+                                <option value="mensajero">Mensajero</option>
                                 <option value="cliente">Cliente</option>
                             </select>
                             <!-- <input type="text"  class="form-control" id="role" name="role" placeholder="Rol" required> -->

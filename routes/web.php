@@ -18,6 +18,7 @@ use App\Http\Controllers\ExtraIngredientController;
 use App\Http\Controllers\Order_extra_ingredientController;
 use App\Http\Controllers\Order_PizzaController;
 use App\Http\Controllers\OrderController;
+use App\Http\Middleware\CheckRole;
 
 Route::get('/', function () {
     return view('welcome');
@@ -73,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pizzas/{pizza}/edit', [PizzaController::class, 'edit'])->name('pizzas.edit');
 
     //Rutas Branches
-    Route::get('/branches', [BranchController::class, 'index'])->name('branches.index');
+    Route::get('/branches', [BranchController::class, 'index'])->middleware(CheckRole::class . ':admin')->name('branches.index');
     Route::post('/branches', [BranchController::class, 'store'])->name('branches.store');
     Route::get('/branches/create', [BranchController::class, 'create'])->name('branches.create');
     Route::delete('/branches/{branch}', [BranchController::class, 'destroy'])->name('branches.destroy');

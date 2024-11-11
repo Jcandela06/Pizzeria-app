@@ -12,15 +12,21 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <!-- Opción de Dashboard (visible para Admin y Cliente) -->
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cliente')
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Panel') }}
                     </x-nav-link>
+                    @endif
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <!-- Opción de Sucursales (visible para Admin) -->
+                    @if(Auth::user()->role === 'admin')
                     <x-nav-link :href="route('branches.index')" :active="request()->routeIs('branches.index')">
                         {{ __('Sucursales') }}
                     </x-nav-link>
+                    @endif
                 </div>
 
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
