@@ -22,7 +22,7 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <!-- Opción de Sucursales (visible para Admin) -->
-                    @if(Auth::user()->role === 'admin')
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'mensajero')
                     <x-nav-link :href="route('branches.index')" :active="request()->routeIs('branches.index')">
                         {{ __('Sucursales') }}
                     </x-nav-link>
@@ -151,7 +151,7 @@
 
 
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cajero' || Auth::user()->role === 'cocinero')
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cajero' || Auth::user()->role === 'cocinero' || Auth::user()->role === 'mensajero')
                     <x-dropdown align="right" width="48">
 
                         <x-slot name="trigger">
@@ -168,19 +168,21 @@
                         </x-slot>
                         @endif
                         <x-slot name="content">
-
+                            @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cajero' || Auth::user()->role === 'cocinero' || Auth::user()->role === 'mensajero')
                             <x-dropdown-link :href="route('orders.index')">
                                 {{ __('Ordenes') }}
                             </x-dropdown-link>
-
+                            @endif
+                            @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cajero' || Auth::user()->role === 'cocinero')
                             <x-dropdown-link :href="route('order_pizzas.index')">
                                 {{ __('Ordenes de pizza') }}
                             </x-dropdown-link>
-
+                            @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cajero' || Auth::user()->role === 'cocinero')
+                            @endif
                             <x-dropdown-link :href="route('order_extra_ingredients.index')">
                                 {{ __('Ordenes de ingredientes Extra') }}
                             </x-dropdown-link>
-
+                            @endif
                         </x-slot>
 
                     </x-dropdown>
