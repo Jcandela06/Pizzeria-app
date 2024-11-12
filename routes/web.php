@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/suppliers/{supplier}/edit', [SupplierController::class, 'edit'])->name('suppliers.edit');
 
     //Rutas Pizzas
-    Route::get('/pizzas', [PizzaController::class, 'index'])->middleware(CheckRole::class . ':admin,cajero,cocinero')->name('pizzas.index');
+    Route::get('/pizzas', [PizzaController::class, 'index'])->middleware(CheckRole::class . ':admin,cajero,cocinero,cliente')->name('pizzas.index');
     Route::post('/pizzas', [PizzaController::class, 'store'])->name('pizzas.store');
     Route::get('/pizzas/create', [PizzaController::class, 'create'])->name('pizzas.create');
     Route::delete('/pizzas/{pizza}', [PizzaController::class, 'destroy'])->name('pizzas.destroy');
@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pizzas/{pizza}/edit', [PizzaController::class, 'edit'])->name('pizzas.edit');
 
     //Rutas Branches
-    Route::get('/branches', [BranchController::class, 'index'])->middleware(CheckRole::class . ':admin,mensajero')->name('branches.index');
+    Route::get('/branches', [BranchController::class, 'index'])->middleware(CheckRole::class . ':admin,mensajero,cliente')->name('branches.index');
     Route::post('/branches', [BranchController::class, 'store'])->name('branches.store');
     Route::get('/branches/create', [BranchController::class, 'create'])->name('branches.create');
     Route::delete('/branches/{branch}', [BranchController::class, 'destroy'])->name('branches.destroy');
@@ -82,7 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/branches/{branch}/edit', [BranchController::class, 'edit'])->name('branches.edit');
 
     //Rutas Ingredientes
-    Route::get('/ingredients', [IngredientController::class, 'index'])->middleware(CheckRole::class . ':admin,cajero,cocinero')->name('ingredients.index');
+    Route::get('/ingredients', [IngredientController::class, 'index'])->middleware(CheckRole::class . ':admin,cajero,cocinero,cliente')->name('ingredients.index');
     Route::post('/ingredients', [IngredientController::class, 'store'])->name('ingredients.store');
     Route::get('/ingredients/create', [IngredientController::class, 'create'])->name('ingredients.create');
     Route::delete('/ingredients/{ingredient}', [IngredientController::class, 'destroy'])->name('ingredients.destroy');
@@ -114,7 +114,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pizza_raw_materials/{pizza_raw_material}/edit', [Pizza_raw_materialController::class, 'edit'])->name('pizza_raw_materials.edit');
 
     //Rutas Tamaño Pizza
-    Route::get('/pizza_sizes', [Pizza_SizeController::class, 'index'])->middleware(CheckRole::class . ':admin,cajero,cocinero')->name('pizza_sizes.index');
+    Route::get('/pizza_sizes', [Pizza_SizeController::class, 'index'])->middleware(CheckRole::class . ':admin,cajero,cocinero,cliente')->name('pizza_sizes.index');
     Route::post('/pizza_sizes', [Pizza_SizeController::class, 'store'])->name('pizza_sizes.store');
     Route::get('/pizza_sizes/create', [Pizza_SizeController::class, 'create'])->name('pizza_sizes.create');
     Route::delete('/pizza_sizes/{pizza_size}', [Pizza_SizeController::class, 'destroy'])->name('pizza_sizes.destroy');
@@ -122,7 +122,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pizza_sizes/{id}/edit', [Pizza_SizeController::class, 'edit'])->name('pizza_sizes.edit');
 
     //Rutas Pizza_Ingredients
-    Route::get('/pizza_ingredients', [Pizza_IngredientController::class, 'index'])->middleware(CheckRole::class . ':admin,cajero,cocinero')->name('pizza_ingredients.index');
+    Route::get('/pizza_ingredients', [Pizza_IngredientController::class, 'index'])->middleware(CheckRole::class . ':admin,cajero,cocinero,cliente')->name('pizza_ingredients.index');
     Route::post('/pizza_Ingredients', [Pizza_IngredientController::class, 'store'])->name('pizza_ingredients.store');
     Route::get('/pizza_Ingredients/create', [Pizza_IngredientController::class, 'create'])->name('pizza_ingredients.create');
     Route::delete('/pizza_Ingredients/{pizza_Ingredient}', [Pizza_IngredientController::class, 'destroy'])->name('pizza_ingredients.destroy');
@@ -130,7 +130,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pizza_Ingredients/{pizza_Ingredient}/edit', [Pizza_IngredientController::class, 'edit'])->name('pizza_ingredients.edit');
 
     //Rutas Ingrediente Extra
-    Route::get('/extraingredient', [ExtraIngredientController::class, 'index'])->middleware(CheckRole::class . ':admin,cajero,cocinero')->name('extraingredient.index');
+    Route::get('/extraingredient', [ExtraIngredientController::class, 'index'])->middleware(CheckRole::class . ':admin,cajero,cocinero,cliente')->name('extraingredient.index');
     Route::get('/extraingredient/create', [ExtraIngredientController::class, 'create'])->name('extraingredient.create');
     Route::post('/extraingredient', [ExtraIngredientController::class, 'store'])->name('extraingredient.store');
     Route::get('/extraingredient/{id}/edit', [ExtraIngredientController::class, 'edit'])->name('extraingredient.edit'); 

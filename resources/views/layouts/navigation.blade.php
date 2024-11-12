@@ -22,7 +22,7 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <!-- Opción de Sucursales (visible para Admin) -->
-                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'mensajero')
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'mensajero' || Auth::user()->role === 'cliente')
                     <x-nav-link :href="route('branches.index')" :active="request()->routeIs('branches.index')">
                         {{ __('Sucursales') }}
                     </x-nav-link>
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cliente')
+                    @if(Auth::user()->role === 'admin')
                     <x-dropdown align="right" width="48">
 
                         <x-slot name="trigger">
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cliente')
+                    @if(Auth::user()->role === 'admin')
                     <x-dropdown align="right" width="48">
 
                         <x-slot name="trigger">
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cajero' || Auth::user()->role === 'cocinero')
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cajero' || Auth::user()->role === 'cocinero' || Auth::user()->role === 'cliente')
                     <x-dropdown align="right" width="48">
 
                         <x-slot name="trigger">
