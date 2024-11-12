@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <!-- Opción de Dashboard (visible para Admin y Cliente) -->
-                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cliente')
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cajero')
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Panel') }}
                     </x-nav-link>
@@ -30,6 +30,7 @@
                 </div>
 
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cliente')
                     <x-dropdown align="right" width="48">
 
                         <x-slot name="trigger">
@@ -44,7 +45,7 @@
 
                             </button>
                         </x-slot>
-
+                        @endif
                         <x-slot name="content">
                             <x-dropdown-link :href="route('users.index')">
                                 {{ __('Usuarios') }}
@@ -63,6 +64,7 @@
                 </div>
 
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cliente')
                     <x-dropdown align="right" width="48">
 
                         <x-slot name="trigger">
@@ -77,7 +79,7 @@
 
                             </button>
                         </x-slot>
-
+                        @endif
                         <x-slot name="content">
 
                             <x-dropdown-link :href="route('suppliers.index')">
@@ -101,6 +103,7 @@
                 </div>
 
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cajero' || Auth::user()->role === 'cocinero')
                     <x-dropdown align="right" width="48">
 
                         <x-slot name="trigger">
@@ -115,7 +118,7 @@
 
                             </button>
                         </x-slot>
-
+                        @endif
                         <x-slot name="content">
 
                             <x-dropdown-link :href="route('pizzas.index')">
@@ -148,6 +151,7 @@
 
 
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
+                    @if(Auth::user()->role === 'admin' || Auth::user()->role === 'cajero' || Auth::user()->role === 'cocinero')
                     <x-dropdown align="right" width="48">
 
                         <x-slot name="trigger">
@@ -162,7 +166,7 @@
 
                             </button>
                         </x-slot>
-
+                        @endif
                         <x-slot name="content">
 
                             <x-dropdown-link :href="route('orders.index')">

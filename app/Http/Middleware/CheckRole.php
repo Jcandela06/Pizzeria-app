@@ -13,18 +13,25 @@ class CheckRole
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param  string  $role
+     * @param  string  ...$roles
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, string $role)
+    public function handle(Request $request, Closure $next, string ...$roles)
     {
-        // Verificar si el usuario está autenticado y tiene el rol requerido
-        if (!Auth::check() || Auth::user()->role !== $role) {
-            // Si no tiene el rol, devolver un error 403 (Forbidden)
+        // Verificar si el usuario está autenticado
+        if (!Auth::check()) {
             abort(403, 'Unauthorized access');
         }
 
-        // Si tiene el rol, permitir acceso a la ruta
+        // Obtener el rol del usuario
+        $userRole = Auth::user()->role;
+
+        // Verificar si el rol del usuario está en la lista de roles permitidos
+        if (!in_array($userRole, $roles)) {
+            abort(403, 'Unauthorized access');
+        }
+
+        // Si tiene uno de los roles permitidos, permitir acceso a la ruta
         return $next($request);
     }
 }
