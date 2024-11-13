@@ -9,8 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    @if(Auth::user()->role === 'admin')
                     <a href="{{ route('branches.create') }}"
                         class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded ml-2">Add</a>
+                    @endif
                     <table class="table">
                         <thead>
                             <tr>
@@ -26,7 +28,8 @@
                                 <td>{{ $branch->name }}</td>
                                 <td>{{ $branch->address }}</td>
                                 <td>
-                                <a href="{{ route('branches.edit', $branch->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a></li>
+                                    @if(Auth::user()->role === 'admin')
+                                    <a href="{{ route('branches.edit', $branch->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a></li>
 
                                     <form action="{{ route('branches.destroy', $branch->id) }}" method="POST" style="display: inline-block">
                                         @csrf
@@ -35,6 +38,7 @@
                                             Delete
                                         </button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
