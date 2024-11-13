@@ -9,10 +9,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    @if(Auth::user()->role === 'admin')
                     <a href="{{ route('pizza_ingredients.create') }}" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded ml-2">Add</a>
+                    @endif
                     <table class="table">
                         <thead>
-                        <!-- id	user_id	position	identification_number	salary	hire_date -->
+                            <!-- id	user_id	position	identification_number	salary	hire_date -->
                             <tr>
                                 <th scope="col">Id</th>
                                 <th scope="col">Pizza</th>
@@ -23,9 +25,10 @@
                             @foreach ($pizza_ingredients as $pizza_ingredient)
                             <tr>
                                 <th scope="row">{{ $pizza_ingredient->id }}</th>
-                                <td>{{ $pizza_ingredient->pizza->name }}</td> 
+                                <td>{{ $pizza_ingredient->pizza->name }}</td>
                                 <td>{{ $pizza_ingredient->ingredient->name }}</td>
                                 <td>
+                                    @if(Auth::user()->role === 'admin')
                                     <a href="{{ route('pizza_ingredients.edit', $pizza_ingredient->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         Edit
                                     </a></li>
@@ -35,6 +38,7 @@
                                             Delete
                                         </button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

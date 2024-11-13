@@ -9,7 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    @if(Auth::user()->role === 'admin')
                     <a href="{{ route('extraingredient.create') }}" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded ml-2">Add</a>
+                    @endif
                     <table class="table">
                         <thead>
                             <tr>
@@ -26,11 +28,13 @@
                                 <td>{{ $extraIngredient->name }}</td>
                                 <td>{{ $extraIngredient->price }}</td>
                                 <td>
+                                    @if(Auth::user()->role === 'admin')
                                     <a href="{{ route('extraingredient.edit', $extraIngredient->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
                                     <form action="{{ route('extraingredient.destroy', $extraIngredient->id) }}" method="POST" style="display: inline-block">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" id="delete">Delete</button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

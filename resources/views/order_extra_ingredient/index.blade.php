@@ -9,8 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    @if(Auth::user()->role === 'admin')
                     <a href="{{ route('order_extra_ingredients.create') }}" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded ml-2">Add</a>
-
+                    @endif
                     <table class="table">
                         <thead>
                             <tr>
@@ -22,13 +23,14 @@
                         </thead>
                         <tbody>
                             @foreach ($order_extra_ingredients as $order_extra_ingredient)
-                            <tr>		
+                            <tr>
                                 <th scope="row">{{ $order_extra_ingredient->id }}</th>
                                 <td>{{ $order_extra_ingredient->order->id }}</td> <!-- Aquí mostramos el nombre del material -->
                                 <td>{{ $order_extra_ingredient->extra_ingredient->name }}</td> <!-- Aquí mostramos el tamaño -->
                                 <td>{{ $order_extra_ingredient->quantity }}</td>
 
                                 <td>
+                                    @if(Auth::user()->role === 'admin')
                                     <a href="{{ route('order_extra_ingredients.edit', $order_extra_ingredient->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         Edit
                                     </a></li>
@@ -39,6 +41,7 @@
                                             Delete
                                         </button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
