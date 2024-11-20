@@ -12,6 +12,9 @@ use App\Http\Controllers\api\Pizza_SizeController;
 use App\Http\Controllers\api\PizzaController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\Order_PizzaController;
+use App\Http\Controllers\Api\Pizza_raw_materialController;
+use App\Http\Controllers\Api\PurchaseController;
+use App\Http\Controllers\Api\Raw_materialController;
 use App\Http\Controllers\api\SupplierController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +36,8 @@ Route::apiResource('orders', OrderController::class);
 Route::apiResource('order_pizza', Order_PizzaController::class);
 Route::apiResource('order_extra_ingredient', Order_extra_ingredientController::class);
 Route::apiResource('suppliers', SupplierController::class);
-
+Route::apiResource('raw_materials', Raw_materialController::class);
+Route::apiResource('purchases', PurchaseController::class);
+Route::apiResource('pizza_raw_material', Pizza_raw_materialController::class);
 
 
