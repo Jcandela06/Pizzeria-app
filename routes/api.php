@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\api\BranchController;
 use App\Http\Controllers\api\ClientController;
 use App\Http\Controllers\api\EmployeeController;
+use App\Http\Controllers\api\ExtraIngredientController;
 use App\Http\Controllers\api\IngredientController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\api\Pizza_IngredientController;
 use App\Http\Controllers\api\Pizza_SizeController;
 use App\Http\Controllers\api\PizzaController;
@@ -21,3 +24,6 @@ Route::apiResource('pizzas', PizzaController::class);
 Route::apiResource('pizza_size', Pizza_SizeController::class);
 Route::apiResource('ingredients', IngredientController::class);
 Route::apiResource('pizza_ingredient', Pizza_IngredientController::class);
+Route::apiResource('extra_ingredients', ExtraIngredientController::class);
+Route::apiResource('branches', BranchController::class);
+Route::apiResource('orders', OrderController::class);
